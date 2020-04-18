@@ -6,10 +6,28 @@ pool:
 
 steps:
   - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: install
+      workingDir: AdminClient/
+
+  - task: Npm@1
+    displayName: 'Build Angular'
+    inputs:
+      command: custom
+      customCommand: run build -- --prod
+      workingDir: AdminClient/
+
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'angular'
+      targetPath: 'AdminClient/dist'
+
+  - task: Npm@1
     displayName: 'Test Angular'
     inputs:
       command: custom
-      customCommand: npm run test -- --no-watch --no-progress --code-coverage=true --browsers=ChromeHeadlessCI
+      customCommand: run test -- --watch=false --code-coverage
       workingDir: AdminClient/
 
   - task: PublishCodeCoverageResults@1
