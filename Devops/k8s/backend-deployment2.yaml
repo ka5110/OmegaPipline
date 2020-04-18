@@ -10,6 +10,7 @@ spec:
   template:
     metadata:
       labels:
+        app: omega
         component: backend2
     spec:
       containers:
@@ -28,4 +29,11 @@ spec:
                     secretKeyRef:
                       name: dev-db
                       key: SECRETS_DB_PASSWORD
+                - name: SECRETS_DATABASE_NAME
+                  valueFrom:
+                      secretKeyRef:
+                       name: dev-db
+                       key: SECRETS_DB_NAME
+
+
 
