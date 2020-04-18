@@ -17,21 +17,19 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly', 'text-summary'],
+      reports: ['html', 'lcovonly', 'text-summary', 'cobertura'],
       fixWebpackSourcePaths: true
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'junit'],
+    junitReporter: {
+      outputDir: '../junit'
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
-    customLaunchers: {
-      ChromeHeadlessCI: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
-      }
-    },
+    browsers: ['ChromeHeadless'],
     singleRun: false,
   });
 };
+
