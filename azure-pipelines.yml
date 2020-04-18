@@ -1,0 +1,57 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'Backend/OmegaSpring/pom.xml'
+      goals: 'clean verify'
+      publishJUnitResults: false
+      javaHomeOption: 'JDKVersion'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      sonarQubeRunAnalysis: false
+
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'omegacr'
+      repository: 'omegacr.azurecr.io/dev-backend'
+      command: 'buildAndPush'
+      Dockerfile: './Backend/OmegaSpring/Dockerfile'
+      buildContext: './Backend/OmegaSpring'
+      tags: |
+        latest
+        $(Build.BuildId)
+
+
+  - task: Kubernetes@1
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceEndpoint: 'OmegaCluster-default'
+      namespace: 'default'
+      command: 'apply'
+      arguments: '-f ./Devops/k8s'
+      
+  - task: Kubernetes@1
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceEndpoint: 'OmegaCluster-default'
+      namespace: 'default'
+      command: 'set'
+      arguments: 'image deployment/backend-deployment backend=omegacr.azurecr.io/dev-backend:$(Build.BuildId)'
+ 
