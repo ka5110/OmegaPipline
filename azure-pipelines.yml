@@ -29,7 +29,7 @@ steps:
 
   - task: Docker@2
     inputs:
-      containerRegistry: 'omegacr.azurecr.io'
+      containerRegistry: 'omegacr'
       repository: 'omegacr.azurecr.io/dev-backend'
       command: 'buildAndPush'
       Dockerfile: './backend/OmegaSpring/Dockerfile'
