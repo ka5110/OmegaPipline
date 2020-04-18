@@ -1,13 +1,3 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
   - master
 
@@ -15,6 +5,46 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+  - task: Npm@1
+    displayName: 'Test Angular'
+    inputs:
+      command: custom
+      customCommand: run test -- --watch=false --code-coverage
+      workingDir: src/angular7
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage Angular results'
+    condition: succeededOrFailed()
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: 'src/angular7/coverage/cobertura-coverage.xml'
+      reportDirectory: src/angular7/coverage
+      failIfCoverageEmpty: true
+
+  
+  - task: PublishTestResults@2
+    displayName: 'Publish Angular test results'
+    condition: succeededOrFailed()
+    inputs:
+      searchFolder: $(System.DefaultWorkingDirectory)/src/angular7/junit
+      testRunTitle: Angular
+      testResultsFormat: JUnit
+      testResultsFiles: "**/TESTS*.xml"
+
+  - task: DeleteFiles@1
+    displayName: 'Delete JUnit files'
+    inputs:
+      SourceFolder: src/angular7/junit
+      Contents: 'TESTS*.xml'
+
+  - task: Npm@1
+    displayName: 'Lint Angular'
+    inputs:
+      command: custom
+      customCommand: run lint --  --format=stylish
+      workingDir: src/angular7
+
+
 
   - task: Maven@3
     inputs:
