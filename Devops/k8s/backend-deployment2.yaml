@@ -16,7 +16,7 @@ spec:
         - name: backend2-api
           image: omegacr.azurecr.io/dev-backend
           ports:
-            - containerPort: 80
+            - containerPort: 5000
           env:
                 - name: SECRETS_DB_USERNAME
                   valueFrom:
