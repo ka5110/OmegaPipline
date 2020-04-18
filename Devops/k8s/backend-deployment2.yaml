@@ -25,27 +25,18 @@ spec:
                 - name: SECRETS_DB_USERNAME
                   valueFrom:
                     secretKeyRef:
-                      name: dev-db
-                      key: SECRETS_DB_USERNAME
+                      name: devops2-db
+                      key: spring.datasource.username
                 - name: SECRETS_DB_PASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: dev-db
-                      key: SECRETS_DB_PASSWORD
-                - name: SECRETS_DB_NAME
-                  valueFrom:
-                      secretKeyRef:
-                       name: dev-db
-                       key: SECRETS_DB_NAME
+                      name: devops2-db
+                      key: spring.datasource.password
                 - name: SECRETS_DB_URL
                   valueFrom:
                       secretKeyRef:
-                       name: dev-db
-                       key: SECRETS_DB_URL
-      volumes:
-            - name: cache-volume
-              emptyDir: {}
-
+                       name: devops2-db
+                       key: spring.datasource.url
 
 
 
