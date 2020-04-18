@@ -5,5 +5,3 @@ metadata:
 spec:
   type: ExternalName
   externalName: omegadatabase3.mysql.database.azure.com
-selector:
-  component: backend2
