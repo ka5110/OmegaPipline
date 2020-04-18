@@ -37,6 +37,10 @@ spec:
                       secretKeyRef:
                        name: devops2-db
                        key: spring.datasource.url
+      volumes:
+            - name: cache-volume
+              emptyDir: {}
+
 
 
 
