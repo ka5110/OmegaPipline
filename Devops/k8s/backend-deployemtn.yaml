@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'backend-deployment'
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      component: backend
+  template:
+    metadata:
+      labels:
+        component: backend
+    spec:
+      containers:
+        - name: backend
+          image: omegacr.azurecr.io/dev-backend
+          ports:
+            - containerPort: 80
+          env:
+            - env:
+                - name: SECRETS_DB_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: dev-db
+                      key: SECRETS_DB_USERNAME
+                - name: SECRETS_DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: dev-db
+                      key: SECRETS_DB_PASSWORD
+
