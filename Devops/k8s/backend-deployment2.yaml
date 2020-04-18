@@ -10,12 +10,15 @@ spec:
   template:
     metadata:
       labels:
-        app: omega
+
         component: backend2
     spec:
       containers:
         - name: backend2-api
           image: omegacr.azurecr.io/dev-backend
+          volumeMounts:
+            - mountPath: /cache
+              name: cache-volume
           ports:
             - containerPort: 5000
           env:
@@ -29,11 +32,20 @@ spec:
                     secretKeyRef:
                       name: dev-db
                       key: SECRETS_DB_PASSWORD
-                - name: SECRETS_DATABASE_NAME
+                - name: SECRETS_DB_NAME
                   valueFrom:
                       secretKeyRef:
                        name: dev-db
                        key: SECRETS_DB_NAME
+                - name: SECRETS_DB_URL
+                  valueFrom:
+                      secretKeyRef:
+                       name: dev-db
+                       key: SECRETS_DB_URL
+      volumes:
+            - name: cache-volume
+              emptyDir: {}
+
 
 
 
