@@ -15,7 +15,7 @@ steps:
     displayName: 'Build Angular'
     inputs:
       command: custom
-      customCommand: run build -- --prod
+      customCommand: run build --
       workingDir: AdminClient/
 
   - task: PublishPipelineArtifact@0
@@ -28,7 +28,7 @@ steps:
     inputs:
       command: custom
       customCommand: run test -- --watch=false --code-coverage
-      workingDir: AdminClient/
+      workingDir: AdminClient/dist
 
   - task: PublishCodeCoverageResults@1
     displayName: 'Publish code coverage Angular results'
