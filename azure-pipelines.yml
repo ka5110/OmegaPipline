@@ -18,7 +18,7 @@ steps:
 
   - task: Maven@3
     inputs:
-      mavenPomFile: 'backend/OmegaSpring/pom.xml'
+      mavenPomFile: 'Backend/OmegaSpring/pom.xml'
       goals: 'clean verify'
       publishJUnitResults: false
       javaHomeOption: 'JDKVersion'
