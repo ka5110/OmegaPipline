@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 'backend-deployment'
+  name: 'backend-deployment2'
 spec:
   replicas: 5
   selector:
     matchLabels:
-      component: backend
+      component: backend2
   template:
     metadata:
       labels:
-        component: backend
+        component: backend2
     spec:
       containers:
-        - name: backend
+        - name: backend2-api
           image: omegacr.azurecr.io/dev-backend
           ports:
             - containerPort: 80
