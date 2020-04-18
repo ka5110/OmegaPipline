@@ -4,4 +4,4 @@ metadata:
   name: mysql
 spec:
   type: ExternalName
-  externalName: omegadatabase3.mysql.database.azure.com
+  externalName: omegadatabase3.mysql.database.azure.com/omegarestapi
