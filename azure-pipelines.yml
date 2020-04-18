@@ -32,8 +32,8 @@ steps:
       containerRegistry: 'omegacr'
       repository: 'omegacr.azurecr.io/dev-backend'
       command: 'buildAndPush'
-      Dockerfile: './backend/OmegaSpring/Dockerfile'
-      buildContext: './backend/OmegaSpring'
+      Dockerfile: './Backend/OmegaSpring/Dockerfile'
+      buildContext: './Backend/OmegaSpring'
       tags: |
         latest
         $(Build.BuildId)
