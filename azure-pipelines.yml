@@ -53,5 +53,5 @@ steps:
       kubernetesServiceEndpoint: 'OmegaCluster-default'
       namespace: 'default'
       command: 'set'
-      arguments: 'image deployment/backend-deployment backend=omegacr.azurecr.io/dev-backend:$(Build.BuildId)'
+      arguments: 'image deployment/backend-deployment2 backend2=omegacr.azurecr.io/dev-backend:$(Build.BuildId)'
  
