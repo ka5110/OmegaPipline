@@ -34,9 +34,10 @@ steps:
     displayName: 'Publish code coverage Angular results'
     condition: succeededOrFailed()
     inputs:
-      codeCoverageTool: Cobertura
-      summaryFileLocation: 'AdminClient/cobertura-coverage.xml'
-      reportDirectory: AdminClient
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: 'AdminClient/coverage/cobertura-coverage.xml'
+      pathToSources: 'AdminClient/'
+      reportDirectory: 'AdminClient/coverage'
       failIfCoverageEmpty: true
 
   
@@ -47,7 +48,7 @@ steps:
       searchFolder: $(System.DefaultWorkingDirectory)/AdminClient/junit
       testRunTitle: Angular
       testResultsFormat: JUnit
-      testResultsFiles: "**/TESTS*.xml"
+      testResultsFiles: "**/*.xml"
 
 
 
