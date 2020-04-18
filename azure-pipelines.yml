@@ -28,7 +28,7 @@ steps:
     inputs:
       command: custom
       customCommand: run test -- --watch=false --code-coverage
-      workingDir: AdminClient/dist
+      workingDir: AdminClient/
 
   - task: PublishCodeCoverageResults@1
     displayName: 'Publish code coverage Angular results'
