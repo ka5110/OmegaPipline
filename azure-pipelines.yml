@@ -49,11 +49,7 @@ steps:
       testResultsFormat: JUnit
       testResultsFiles: "**/TESTS*.xml"
 
-  - task: DeleteFiles@1
-    displayName: 'Delete JUnit files'
-    inputs:
-      SourceFolder: AdminClient/junit
-      Contents: 'TESTS*.xml'
+
 
   - task: Npm@1
     displayName: 'Lint Angular'
