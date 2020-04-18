@@ -1,0 +1,11 @@
+kind: "Endpoints"
+apiVersion: "v1"
+metadata:
+  name: "external-mysql-service"
+subsets:
+  -
+    addresses:
+      -ip: "10.0.0.0"
+    ports:
+      -port: 3306
+        name: "mysql"
