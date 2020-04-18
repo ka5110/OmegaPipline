@@ -16,9 +16,6 @@ spec:
       containers:
         - name: backend2-api
           image: omegacr.azurecr.io/dev-backend
-          volumeMounts:
-            - mountPath: /cache
-              name: cache-volume
           ports:
             - containerPort: 5000
           env:
@@ -37,9 +34,6 @@ spec:
                       secretKeyRef:
                        name: devops2-db
                        key: spring.datasource.url
-      volumes:
-            - name: cache-volume
-              emptyDir: {}
 
 
 
