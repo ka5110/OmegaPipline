@@ -10,15 +10,15 @@ steps:
     inputs:
       command: custom
       customCommand: run test -- --watch=false --code-coverage
-      workingDir: src/angular7
+      workingDir: AdminClient/
 
   - task: PublishCodeCoverageResults@1
     displayName: 'Publish code coverage Angular results'
     condition: succeededOrFailed()
     inputs:
       codeCoverageTool: Cobertura
-      summaryFileLocation: 'src/angular7/coverage/cobertura-coverage.xml'
-      reportDirectory: src/angular7/coverage
+      summaryFileLocation: 'AdminClient/cobertura-coverage.xml'
+      reportDirectory: AdminClient
       failIfCoverageEmpty: true
 
   
@@ -26,7 +26,7 @@ steps:
     displayName: 'Publish Angular test results'
     condition: succeededOrFailed()
     inputs:
-      searchFolder: $(System.DefaultWorkingDirectory)/src/angular7/junit
+      searchFolder: $(System.DefaultWorkingDirectory)/AdminClient/junit
       testRunTitle: Angular
       testResultsFormat: JUnit
       testResultsFiles: "**/TESTS*.xml"
@@ -34,7 +34,7 @@ steps:
   - task: DeleteFiles@1
     displayName: 'Delete JUnit files'
     inputs:
-      SourceFolder: src/angular7/junit
+      SourceFolder: AdminClient/junit
       Contents: 'TESTS*.xml'
 
   - task: Npm@1
@@ -42,7 +42,7 @@ steps:
     inputs:
       command: custom
       customCommand: run lint --  --format=stylish
-      workingDir: src/angular7
+      workingDir: AdminClient/
 
 
 
