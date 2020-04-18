@@ -36,14 +36,15 @@ COPY . .
 RUN npm run build -- --output-path=./dist/out
 # Step 3:
 FROM nginx:1.15
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
-COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
+#COPY --from=build-stage nginx.conf /etc/nginx/conf.d/default.conf
 
 #COPY nginx/default.conf /etc/nginx/default.conf
 #RUN rm -rf /usr/share/nginx/html/*
 #COPY --from=build /usr/src/app/dist/adminclient /usr/share/nginx/html
 #
-#EXPOSE 4200
-#ENTRYPOINT ["nginx", "-g", "daemon off;"]
+EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
