@@ -35,8 +35,8 @@ steps:
     condition: succeededOrFailed()
     inputs:
       codeCoverageTool: Cobertura
-      summaryFileLocation: 'AdminClient/cobertura-coverage.xml'
-      reportDirectory: AdminClient
+      summaryFileLocation: 'AdminClient/coverage/cobertura-coverage.xml'
+      reportDirectory: AdminClient/coverage
       failIfCoverageEmpty: true
 
   
