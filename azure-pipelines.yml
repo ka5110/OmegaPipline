@@ -4,62 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      command: install
-      workingDir: AdminClient/
-
-  - task: Npm@1
-    displayName: 'Build Angular'
-    inputs:
-      command: custom
-      customCommand: run build --
-      workingDir: AdminClient/
-
-  - task: PublishPipelineArtifact@0
-    inputs:
-      artifactName: 'angular'
-      targetPath: 'AdminClient/dist'
-
-  - task: Npm@1
-    displayName: 'Test Angular'
-    inputs:
-      command: custom
-      customCommand: run test -- --watch=false --code-coverage
-      workingDir: AdminClient/
-
-  - task: PublishCodeCoverageResults@1
-    displayName: 'Publish code coverage Angular results'
-    condition: succeededOrFailed()
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: 'AdminClient/coverage/cobertura-coverage.xml'
-      pathToSources: 'AdminClient/'
-      reportDirectory: 'AdminClient/coverage'
-      failIfCoverageEmpty: true
-
-  
-  - task: PublishTestResults@2
-    displayName: 'Publish Angular test results'
-    condition: succeededOrFailed()
-    inputs:
-      searchFolder: $(System.DefaultWorkingDirectory)/AdminClient/junit
-      testRunTitle: Angular
-      testResultsFormat: JUnit
-      testResultsFiles: "**/*.xml"
-
-
-
-  - task: Npm@1
-    displayName: 'Lint Angular'
-    inputs:
-      command: custom
-      customCommand: run lint --  --format=stylish
-      workingDir: AdminClient/
-
-
+steps: 
 
   - task: Maven@3
     inputs:
