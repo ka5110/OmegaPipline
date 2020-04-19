@@ -7,5 +7,5 @@ spec:
   selector:
     component: backend2
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 5000

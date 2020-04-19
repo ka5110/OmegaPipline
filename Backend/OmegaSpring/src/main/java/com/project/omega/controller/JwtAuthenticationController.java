@@ -54,14 +54,14 @@ public class JwtAuthenticationController {
     @Autowired
     private MessageSource messages;
 
-    @PostMapping(value = "/authenticate")
+    @PostMapping(value = "/api/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         LOGGER.debug("Authentication for JwtRequest: {}", authenticationRequest);
         authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
         return ResponseEntity.ok(new JwtResponse(authenticationService.createJWTToken(authenticationRequest)));
     }
 
-    @PostMapping(value = "/registration", headers = "Accept=application/json")
+    @PostMapping(value = "/api/registration", headers = "Accept=application/json")
     public ResponseEntity createUser(@RequestBody UserDTO user) throws DuplicateUserException, Exception {
         LOGGER.debug("User Registration Process: {}", user);
         /*CALLS THE authenticate() method in the same class */
