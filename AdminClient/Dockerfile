@@ -23,7 +23,7 @@
 ## and then use nginx image to build our final frontend image, 2 step process.
 #
 # Step 1:
-FROM node:10.13.0 AS build-stage
+FROM node:12.16.0 AS build-stage
 WORKDIR /app
 COPY package*.json /app/
 
@@ -33,7 +33,7 @@ COPY ./ /app/
 COPY . .
 
 # Step 2:
-RUN npm run build -- --output-path=./dist/out
+RUN npx ng build  --output-path=./dist/out
 # Step 3:
 FROM nginx:1.15
 COPY ./nginx.conf /etc/nginx/nginx.conf
@@ -45,6 +45,6 @@ COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
 #RUN rm -rf /usr/share/nginx/html/*
 #COPY --from=build /usr/src/app/dist/adminclient /usr/share/nginx/html
 #
-EXPOSE 80
+EXPOSE 4200
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
