@@ -19,7 +19,7 @@ steps:
     displayName: 'Build Angular'
     inputs:
       command: custom
-      customCommand: run npx ng build
+      customCommand: run build
       workingDir: AdminClient
 
   - script: npx ng test --watch=false
