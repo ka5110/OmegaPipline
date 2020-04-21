@@ -44,7 +44,7 @@ steps:
   - task: Kubernetes@1
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: 'OmegaCluster-default'
+      kubernetesServiceEndpoint: 'OmegaCluster-default2'
       namespace: 'default'
       command: 'apply'
       arguments: '-f ./Devops/k8s'
@@ -52,7 +52,7 @@ steps:
   - task: Kubernetes@1
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: 'OmegaCluster-default'
+      kubernetesServiceEndpoint: 'OmegaCluster-default2'
       namespace: 'default'
       command: 'set'
       arguments: 'image deployment/backend-deployment2 backend2-api=omegacr.azurecr.io/dev-backend:$(Build.BuildId)'
@@ -60,7 +60,7 @@ steps:
   - task: Kubernetes@1
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: 'OmegaCluster-default'
+      kubernetesServiceEndpoint: 'OmegaCluster-default2'
       namespace: 'default'
       command: 'set'
       arguments: 'image deployment/frontend-deployment frontend-adminclient=omegacr.azurecr.io/dev-frontend:$(Build.BuildId)'
