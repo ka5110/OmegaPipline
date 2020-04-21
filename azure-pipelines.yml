@@ -29,10 +29,10 @@ steps:
       workingDir: AdminClient/
       
   - task: Npm@1
-    displayName: 'tests'
+    displayName: 'Tests'
     inputs:
       command: custom
-      customCommand: run ng test --browsers=ChromeHeadlessCI -- --watch=false -no-progress --code-coverage=true 
+      customCommand: run ng test   --browsers=ChromeHeadlessCI -- --watch=false --no-progress --code-coverage=true 
       workingDir: AdminClient/
 
   - task: PublishTestResults@2
