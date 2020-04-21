@@ -4,7 +4,31 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps: 
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: install
+      workingDir: AdminClient/
+
+  - task: Npm@1
+    displayName: 'Build Angular'
+    inputs:
+      command: custom
+      customCommand: run npx ng build
+      workingDir: AdminClient
+
+  - script: npx ng test --watch=false
+    displayName: 'Tests'
+
+  # - task: PublishPipelineArtifact@0
+  #   inputs:
+  #      artifactName: 'angular'
+  #      targetPath: 'AdminClient/dist'
 
   - task: Maven@3
     inputs:
