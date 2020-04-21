@@ -29,12 +29,25 @@ steps:
       workingDir: AdminClient/
       
   - task: Npm@1
-    displayName: 'tests'
+    displayName: 'Tests'
     inputs:
       command: custom
-      customCommand: ng test --watch=false -no-progress --code-coverage=true --browsers=ChromeHeadlessCI
+      customCommand: run ng test -- --watch=false --no-progress --code-coverage=true 
       workingDir: AdminClient/
 
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TEST-*.xml'
+    displayName: 'Publish Test Results'
+
+  - task: PublishCodeCoverageResults@1
+    condition: succeededOrFailed()
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Build.SourcesDirectory)/coverage/ng-azure-devops/cobertura-coverage.xml'
+    displayName: 'Publish Code Coverage Results'
 
 
 
