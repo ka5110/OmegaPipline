@@ -32,7 +32,7 @@ steps:
     displayName: 'tests'
     inputs:
       command: custom
-      customCommand: npm run ng test --browsers=ChromeHeadlessCI -- --watch=false -no-progress --code-coverage=true 
+      customCommand: run ng test --browsers=ChromeHeadlessCI -- --watch=false -no-progress --code-coverage=true 
       workingDir: AdminClient/
 
   - task: PublishTestResults@2
