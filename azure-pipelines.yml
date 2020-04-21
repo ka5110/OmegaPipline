@@ -15,20 +15,11 @@ steps:
       command: install
       workingDir: AdminClient/
 
-  - task: Npm@1
-    displayName: 'Build Angular'
-    inputs:
-      command: custom
-      customCommand: run build
-      workingDir: AdminClient
+  - script: npx ng build
 
   - script: npx ng test --watch=false
     displayName: 'Tests'
 
-  # - task: PublishPipelineArtifact@0
-  #   inputs:
-  #      artifactName: 'angular'
-  #      targetPath: 'AdminClient/dist'
 
   - task: Maven@3
     inputs:
