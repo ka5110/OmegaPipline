@@ -32,7 +32,7 @@ steps:
     displayName: 'tests'
     inputs:
       command: custom
-      customCommand: npx ng test --watch=false
+      customCommand: ng test --watch=false
       workingDir: AdminClient/
 
 
