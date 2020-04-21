@@ -4,50 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  buildConfiguration: 'Release'
-
 steps:
-
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '12.16'
-    displayName: 'Setup Environment'
-
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      command: install
-      workingDir: AdminClient/
-
-
-  - task: Npm@1
-    displayName: 'Build Angular'
-    inputs:
-      command: custom
-      customCommand: run ng build
-      workingDir: AdminClient/
-      
-  - task: Npm@1
-    displayName: 'Tests'
-    inputs:
-      command: custom
-      customCommand: run ng test -- --watch=false --code-coverage=true 
-      workingDir: AdminClient/
-
-  - task: PublishTestResults@2
-    condition: succeededOrFailed()
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '**/TEST-*.xml'
-    displayName: 'Publish Test Results'
-
-  - task: PublishCodeCoverageResults@1
-    condition: succeededOrFailed()
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: '$(Build.SourcesDirectory)/coverage/ng-azure-devops/cobertura-coverage.xml'
-    displayName: 'Publish Code Coverage Results'
 
 
 
