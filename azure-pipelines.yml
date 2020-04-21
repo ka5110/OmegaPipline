@@ -25,7 +25,7 @@ steps:
     displayName: 'Build Angular'
     inputs:
       command: custom
-      customCommand: run ng build -- --prod
+      customCommand: run ng build
       workingDir: AdminClient/
       
   - task: Npm@1
