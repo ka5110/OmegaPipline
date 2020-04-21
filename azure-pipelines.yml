@@ -4,7 +4,39 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps: 
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.16'
+    displayName: 'Setup Environment'
+
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: install
+      workingDir: AdminClient/
+
+
+  - task: Npm@1
+    displayName: 'Build Angular'
+    inputs:
+      command: custom
+      customCommand: run ng build
+      workingDir: AdminClient/
+      
+  - task: Npm@1
+    displayName: 'tests'
+    inputs:
+      command: custom
+      customCommand: ng test --watch=false -no-progress --code-coverage=true --browsers=ChromeHeadlessCI
+      workingDir: AdminClient/
+
+
+
 
   - task: Maven@3
     inputs:
