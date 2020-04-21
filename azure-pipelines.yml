@@ -20,9 +20,22 @@ steps:
       command: install
       workingDir: AdminClient/
 
-  - script: npx ng build
 
-  - script: npx ng test --watch=false
+  - task: Npm@1
+    displayName: 'Build Angular'
+    inputs:
+      command: custom
+      customCommand: run build -- --prod
+      workingDir: AdminClient/
+      
+  - task: Npm@1
+    displayName: 'tests'
+    inputs:
+      command: custom
+      customCommand: npx ng test --watch=false
+      workingDir: AdminClient/
+
+
 
 
   - task: Maven@3
