@@ -9,6 +9,11 @@ variables:
 
 steps:
 
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.16'
+    displayName: 'Setup Environment'
+
   - task: Npm@1
     displayName: 'npm install'
     inputs:
