@@ -35,6 +35,12 @@ steps:
       customCommand: ng test --watch=false -no-progress --code-coverage=true --browsers=ChromeHeadlessCI
       workingDir: AdminClient/
 
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TEST-*.xml'
+    displayName: 'Publish Test Results'
 
 
 
