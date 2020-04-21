@@ -45,6 +45,6 @@ COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
 #RUN rm -rf /usr/share/nginx/html/*
 #COPY --from=build /usr/src/app/dist/adminclient /usr/share/nginx/html
 #
-EXPOSE 4200
+EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
